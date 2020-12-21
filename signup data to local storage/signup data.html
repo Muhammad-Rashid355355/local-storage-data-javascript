@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+           <link rel="stylesheet" href="D:\internship programe\Task 5 save data in local storage\signup.css">     
+</head>
+<body>
+        <a class="waves-effect waves-light btn" onclick="sign_Up()" id="signup_btn">Sign up</a>
+        <a class="waves-effect1 waves-light btn" onclick="view_Data()" id="view_btn">view Data</a>
+        <a class="waves-effect2 waves-light btn" onclick="insert_Data()" id="insert_btn">insert Data</a>
+        
+        
+    <div id="maindiv">
+        <div class="row">
+                <form class="col s12">
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input  id="first_name" type="text" class="validate">
+                      <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="last_name" type="text" class="validate">
+                      <label for="last_name">Last Name</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                        <div class="input-field col s12">
+                          <input id="address" type="text" class="validate">
+                          <label for="address">Address</label>
+                        </div>
+                      </div>
+                 
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="email" type="email" class="validate">
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="password" type="password" class="validate">
+                      <label for="password">Password</label>
+                    </div>
+                  </div>
+                </form>
+                <a class="waves-effect waves-light btn" onclick="submit_Data()">submit Data</a>
+              </div>
+            </div>
+            <table id="array_data_tbl"></table>
+<script>
+  let sign_Up_Data=[];
+function sign_Up(){
+    maindiv.style.display = "block";
+    signup_btn.style.display = "none";
+}
+const submit_Data =()=> {
+let first_Name = first_name.value;
+let last_Name = last_name.value;
+let Address = address.value;
+let Email = email.value;
+let Password = password.value;
+let All_Collect_Data={
+  first_Name,last_Name,Address,Email,Password
+}
+sign_Up_Data.push(All_Collect_Data)
+localStorage.setItem("signup data" , JSON.stringify(sign_Up_Data));
+maindiv.style.display = "none";
+}
+function insert_Data(){
+  maindiv.style.display = "block";
+  localStorage.setItem("signup data" , JSON.stringify(sign_Up_Data));
+}
+const view_Data =()=>{
+  let view_data =JSON.parse(localStorage.getItem("signup data"));
+  view_data.forEach(element => {
+   let First_Name = element.first_Name;
+   let Last_Name = element.last_Name;
+   let Address_data = element.Address;
+   let E_mail = element.Email;
+   let Password_data = element.Password;
+   array_data_tbl.innerHTML = `<tr><td>${First_Name}</td><td>${Last_Name}</td><td>${Address_data}</td><td>${E_mail}</td><td>${Password_data}</td></tr>`;
+ });
+}
+
+</script>
+                    
+    
+</body>
+</html>
